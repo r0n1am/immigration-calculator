@@ -44,14 +44,17 @@ function AppContent() {
   };
 
   const breakpointMatched = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
-
+  
   const drawer = (
     <div role="presentation">
       <Toolbar />
       <Divider />
       <List>
         {[{title:'BC PNP Calculator', link:'/bcpnp-calculator'}].map((item, index) => (
-          <ListItem component={RouterLink} to={item.link} button key={item.title}>
+          <ListItem
+            button component={RouterLink} to={item.link} key={item.title}
+            onClick={handleDrawerToggle}
+          >
             <ListItemText primary={item.title} />
           </ListItem>
         ))}
@@ -59,7 +62,10 @@ function AppContent() {
       <Divider />
       <List>
         {[{title:'Settings', link:'/settings'}].map((item, index) => (
-          <ListItem component={RouterLink} to={item.link} button key={item.title}>
+          <ListItem
+            button component={RouterLink} to={item.link} key={item.title}
+            onClick={handleDrawerToggle}
+          >
             <ListItemText primary={item.title} />
           </ListItem>
         ))}
@@ -132,9 +138,12 @@ function AppContent() {
           </Box>
           <Box
             component="main"
-            sx={{ flexGrow: 1, p: 3, width: { md: `calc(100% - ${drawerWidth}px)` } }}
+            sx={{ flexGrow: 1, p: 3, width: { md: `calc(100% - ${drawerWidth}px)` },
+              height: (theme: Theme) => `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
+              marginTop: (theme: Theme) => `${theme.mixins.toolbar.minHeight}px`,
+            }}
           >
-            <Toolbar />
+            {/* <Toolbar /> */}
             <Routes>
               <Route
                 path="/bcpnp-calculator"
