@@ -21,17 +21,13 @@ const JobSkillLevelScoringGrid: JobSkillLevelScoringGridType = Object.freeze({
       desc: 'Occupation is a "00" NOC',
       score: 15
     }),
-    'bcHighDemandOccupations': Object.freeze({
-      desc: 'Occupation identified in the B.C. High Demand Occupations List in the BC Labour Market Outlook 2018 Edition',
-      score: 10,
-    }),
     'fullTimeForBcEmployer': Object.freeze({
       desc: 'Currently working full-time in B.C. for the employer in the occupation identified in the BC PNP registration',
       score: 10,
     }),
   }),
   // max score
-  'Maximum Score': 60,
+  'Maximum Score': 50,
 });
 
 export default JobSkillLevelScoringGrid;

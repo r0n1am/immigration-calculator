@@ -1,15 +1,14 @@
 import ScoringDataProfile from "./ScoringDataProfile";
-import JobSkillLevelScoringGrid from "./scoring-grid/JobSkillLevelScoringGird";
-import WageScoringGrid from "./scoring-grid/WageScoringGrid";
-import RegionOfEmploymentScoringGrid from "./scoring-grid/RegionOfEmploymentScoringGrid";
-import WorkExperienceScoringGrid from "./scoring-grid/WorkExperienceScoringGrid";
-import EducationScoringGrid from "./scoring-grid/EducationScoringGrid";
-import LanguageScoringGrid from "./scoring-grid/LanguageScoringGrid";
+import JobSkillLevelScoringGrid from "./jobskill/JobSkillLevelScoringGird";
+import WageScoringGrid from "./wage/WageScoringGrid";
+import RegionOfEmploymentScoringGrid from "./region/RegionOfEmploymentScoringGrid";
+import WorkExperienceScoringGrid from "./experience/WorkExperienceScoringGrid";
+import EducationScoringGrid from "./education/EducationScoringGrid";
+import LanguageScoringGrid from "./language/LanguageScoringGrid";
 
 function jobSkillLevelCalculator(data : ScoringDataProfile) : number {
   let score = data.noc in JobSkillLevelScoringGrid.Basic ? JobSkillLevelScoringGrid.Basic[data.noc] : 0;
   score += data.noc00 ? JobSkillLevelScoringGrid.Additional.noc00.score : 0;
-  score += data.bcHighDemandOccupations ? JobSkillLevelScoringGrid.Additional.bcHighDemandOccupations.score : 0;
   score += data.fullTimeForBcEmployer ? JobSkillLevelScoringGrid.Additional.fullTimeForBcEmployer.score : 0;
 
   return Math.min(score, JobSkillLevelScoringGrid["Maximum Score"]);

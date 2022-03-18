@@ -1,9 +1,9 @@
 import React from "react";
-import DataComponentProp from "../../common/DataComponentProp";
+import DataComponentProp from "../../../common/DataComponentProp";
 import ScoringDataProfile from "../ScoringDataProfile";
-import RegionOfEmploymentScoringGrid from "../scoring-grid/RegionOfEmploymentScoringGrid";
+import RegionOfEmploymentScoringGrid from "./RegionOfEmploymentScoringGrid";
 import { RadioGroup, FormControlLabel, Radio } from "@mui/material";
-import DefaultDialog from "../../common/DefaultDialog";
+import DefaultDialog from "../../../common/DefaultDialog";
 
 function RegionOfEmploymentDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const { onClose, value: valueProp, open, breakpoint } = props;

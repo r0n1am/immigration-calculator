@@ -1,9 +1,9 @@
 import React from "react";
-import DataComponentProp from "../../common/DataComponentProp";
+import DataComponentProp from "../../../common/DataComponentProp";
 import ScoringDataProfile from "../ScoringDataProfile";
-import JobSkillLevelScoringGrid from '../scoring-grid/JobSkillLevelScoringGird';
+import JobSkillLevelScoringGrid from './JobSkillLevelScoringGird';
 import { RadioGroup, FormControlLabel, Radio, FormLabel, FormGroup, Checkbox } from "@mui/material";
-import DefaultDialog from "../../common/DefaultDialog";
+import DefaultDialog from "../../../common/DefaultDialog";
 
 function JobSkillLevelDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const { onClose, value: valueProp, open, breakpoint } = props;
@@ -55,10 +55,6 @@ function JobSkillLevelDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
         <FormControlLabel
           control={<Checkbox checked={value?.noc00} onChange={handleAdditionalPointChange} name="noc00" />}
           label={JobSkillLevelScoringGrid.Additional.noc00.desc}
-        />
-        <FormControlLabel
-          control={<Checkbox checked={value?.bcHighDemandOccupations} onChange={handleAdditionalPointChange} name="bcHighDemandOccupations" />}
-          label={JobSkillLevelScoringGrid.Additional.bcHighDemandOccupations.desc}
         />
         <FormControlLabel
           control={<Checkbox checked={value?.fullTimeForBcEmployer} onChange={handleAdditionalPointChange} name="fullTimeForBcEmployer" />}

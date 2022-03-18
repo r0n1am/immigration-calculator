@@ -1,7 +1,7 @@
 import ScoringDataProfile from "./ScoringDataProfile";
 import * as calculation from './ScoringCalculation';
 import ScoringFactorDescription from "./ScoringFactorDescription";
-import { Renderable } from "../common/Renderable";
+import { Renderable } from "../../common/Renderable";
 
 enum ScoringSection {
   EconomicFactors = 'Economic Factors',

@@ -1,5 +1,5 @@
 import { Link } from "@mui/material";
-import { Renderable } from "../common/Renderable";
+import { Renderable } from "../../common/Renderable";
 
 const JobSkillLevel: Renderable =
   <p>

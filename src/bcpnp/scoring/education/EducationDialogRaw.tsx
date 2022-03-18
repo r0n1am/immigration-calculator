@@ -1,9 +1,9 @@
 import React from "react";
-import DataComponentProp from "../../common/DataComponentProp";
+import DataComponentProp from "../../../common/DataComponentProp";
 import ScoringDataProfile from "../ScoringDataProfile";
-import EducationScoringGrid from "../scoring-grid/EducationScoringGrid";
+import EducationScoringGrid from "./EducationScoringGrid";
 import { FormControl, RadioGroup, FormControlLabel, Radio, FormLabel, FormGroup, Checkbox } from "@mui/material";
-import DefaultDialog from "../../common/DefaultDialog";
+import DefaultDialog from "../../../common/DefaultDialog";
 
 function EducationDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const { onClose, value: valueProp, open, breakpoint } = props;
