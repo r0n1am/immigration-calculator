@@ -10,54 +10,64 @@ import RegionOfEmploymentDialogRaw from "./scoring/region/RegionOfEmploymentDial
 import WorkExperienceDialogRaw from "./scoring/experience/WorkExperienceDialogRaw";
 import EducationDialogRaw from "./scoring/education/EducationDialogRaw";
 import LanguageDialogRaw from "./scoring/language/LanguageDialogRaw";
+import * as _ from 'lodash';
 
 function createRowData(
   scoringFactor: ScoringFactor,
-  rowEditComponent: React.ComponentType<DataComponentProp<ScoringDataProfile>>,
-  scoreData: ScoringDataProfile[]
+  rowEditComponent: React.ComponentType<DataComponentProp<ScoringDataProfile>>
 ) : RowData<ScoringDataProfile> {
   return {
     scoringSection: scoringFactor.scoringSection,
     name: scoringFactor.scoringFactorName,
     desc: scoringFactor.scoringFactorDesc,
     rowValueCalculator: scoringFactor.calculation,
-    rowEditComponent,
-    scoreData
+    rowEditComponent
   };
 }
 
-function createRowDataList(profiles: ScoringDataProfile[]): RowData<ScoringDataProfile>[] {
+function createRowDataList(): RowData<ScoringDataProfile>[] {
   return [
-    createRowData(ScoringFactors[ScoringFactorName.JobSkillLevel], JobSkillLevelDialogRaw, profiles),
-    createRowData(ScoringFactors[ScoringFactorName.Wage], WageDialogRaw, profiles),
-    createRowData(ScoringFactors[ScoringFactorName.RegionOfEmployment], RegionOfEmploymentDialogRaw, profiles),
-    createRowData(ScoringFactors[ScoringFactorName.WorkExperience], WorkExperienceDialogRaw, profiles),
-    createRowData(ScoringFactors[ScoringFactorName.Education], EducationDialogRaw, profiles),
-    createRowData(ScoringFactors[ScoringFactorName.Language], LanguageDialogRaw, profiles),
+    createRowData(ScoringFactors[ScoringFactorName.JobSkillLevel], JobSkillLevelDialogRaw),
+    createRowData(ScoringFactors[ScoringFactorName.Wage], WageDialogRaw),
+    createRowData(ScoringFactors[ScoringFactorName.RegionOfEmployment], RegionOfEmploymentDialogRaw),
+    createRowData(ScoringFactors[ScoringFactorName.WorkExperience], WorkExperienceDialogRaw),
+    createRowData(ScoringFactors[ScoringFactorName.Education], EducationDialogRaw),
+    createRowData(ScoringFactors[ScoringFactorName.Language], LanguageDialogRaw),
   ];
 }
 
 function BcPnpCalculator() {
   const [profiles, setProfiles] = React.useState([new ScoringDataProfile('Profile 1'), new ScoringDataProfile('Profile 2')]);
 
-  const onProfileChange = (profile: ScoringDataProfile) => {
-    const newProfiles = profiles.map(oldProfile => {
-      if (oldProfile.profileName === profile.profileName) {
-        return {...profile};
+  const rowData = React.useMemo(() => createRowDataList(), []);
+  const onChange = React.useCallback((profile: ScoringDataProfile) => {
+    setProfiles(
+      oldProfiles => {
+        let isChanged = false;
+        const newProfiles = oldProfiles.map(oldProfile => {
+          if (oldProfile.profileName === profile.profileName
+            && !_.isEqual(oldProfile, profile)){
+            isChanged = true;
+            return {...profile};
+          }
+          return oldProfile;
+        });
+        if (isChanged) {
+          return newProfiles;
+        }
+        return oldProfiles;
       }
-      return {...oldProfile}
-    });
-    setProfiles(newProfiles);
-  };
+    )
+  }, []);
 
   return (
     <CollapsibleTable
       firstColumnHeader="BC PNP Scoring Factor"
-      profiles={profiles}
-      rowDataListCreator={createRowDataList}
-      profileNameExtractor={p => p.profileName}
+      data={profiles}
+      rowData={rowData}
+      columnNameExtractor={p => p.profileName}
       ariaLabel="BC PNP SIRS table"
-      onProfileChange={onProfileChange}
+      onChange={onChange}
     />
   )
 }

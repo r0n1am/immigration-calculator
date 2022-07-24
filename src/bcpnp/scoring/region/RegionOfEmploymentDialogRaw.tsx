@@ -10,9 +10,9 @@ function RegionOfEmploymentDialogRaw(props: DataComponentProp<ScoringDataProfile
   const [value, setValue] = React.useState(valueProp);
 
   React.useEffect(() => {
-    if (!open) {
+    // if (!open) {
       setValue(valueProp);
-    }
+    // }
   }, [valueProp, open]);
 
   const handleCancel = () => {
@@ -24,7 +24,7 @@ function RegionOfEmploymentDialogRaw(props: DataComponentProp<ScoringDataProfile
   };
 
   const handleRegionOfEmploymentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({...(value? value : new ScoringDataProfile('')), regionOfEmployment: event.target.value});
+    setValue({...value, regionOfEmployment: event.target.value});
   };
 
   return (

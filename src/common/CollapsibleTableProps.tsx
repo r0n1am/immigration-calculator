@@ -2,11 +2,11 @@ import RowData from "./RowData";
 
 interface CollapsibleTableProps<T> {
   firstColumnHeader: string;
-  profiles: T[];
-  rowDataListCreator: (p: T[]) => RowData<T>[];
-  profileNameExtractor: (p: T) => string;
+  data: T[];
+  rowData: RowData<T>[];
+  columnNameExtractor: (p: T) => string;
   ariaLabel: string;
-  onProfileChange: (p: T) => void;
+  onChange: (p: T) => void;
 }
 
 export default CollapsibleTableProps;

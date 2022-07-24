@@ -10,18 +10,18 @@ function EducationDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const [value, setValue] = React.useState(valueProp);
 
   React.useEffect(() => {
-    if (!open) {
+    // if (!open) {
       setValue(valueProp);
-    }
+    // }
   }, [valueProp, open]);
   
   const handleEducationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({...(value? value : new ScoringDataProfile('')), highestEducation: event.target.value});
+    setValue({...value, highestEducation: event.target.value});
   };
 
   const handleAdditionalPointChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue({
-      ...(value? value : new ScoringDataProfile('')),
+      ...value,
       bcPostSecondaryEducationCompleted: false,
       caPostSecondaryEducationCompleted: false,
       eca: false,

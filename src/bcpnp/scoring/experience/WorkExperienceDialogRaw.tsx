@@ -10,9 +10,9 @@ function WorkExperienceDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const [value, setValue] = React.useState(valueProp);
 
   React.useEffect(() => {
-    if (!open) {
+    // if (!open) {
       setValue(valueProp);
-    }
+    // }
   }, [valueProp, open]);
 
   const handleCancel = () => {
@@ -24,11 +24,11 @@ function WorkExperienceDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   };
 
   const handleWorkExperienceLevelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({...(value? value : new ScoringDataProfile('')), relatedWorkExperience: event.target.value});
+    setValue({...value, relatedWorkExperience: event.target.value});
   };
 
   const handleAdditionalPointChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({...(value? value : new ScoringDataProfile('')), [event.target.name]: event.target.checked });
+    setValue({...value, [event.target.name]: event.target.checked });
   };
 
   return (

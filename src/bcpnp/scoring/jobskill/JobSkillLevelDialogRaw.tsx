@@ -9,10 +9,11 @@ function JobSkillLevelDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const { onClose, value: valueProp, open, breakpoint } = props;
   const [value, setValue] = React.useState(valueProp);
 
+  React.useEffect(() => console.log(value), [value]);
   React.useEffect(() => {
-    if (!open) {
+    // if (!open) {
       setValue(valueProp);
-    }
+    // }
   }, [valueProp, open]);
 
   const handleCancel = () => {
@@ -24,11 +25,11 @@ function JobSkillLevelDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   };
 
   const handleJobSkillLevelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({...(value? value : new ScoringDataProfile('')), noc: event.target.value});
+    setValue({...value, noc: event.target.value});
   };
 
   const handleAdditionalPointChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({...(value? value : new ScoringDataProfile('')), [event.target.name]: event.target.checked });
+    setValue({...value, [event.target.name]: event.target.checked });
   };
 
   return (

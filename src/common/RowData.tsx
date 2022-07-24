@@ -7,7 +7,6 @@ interface RowData<T> {
   desc: Renderable;
   rowValueCalculator: (t: T) => number;
   rowEditComponent: React.ComponentType<DataComponentProp<T>>;
-  scoreData: T[];
 }
 
 export default RowData;

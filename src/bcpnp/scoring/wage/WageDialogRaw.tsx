@@ -9,10 +9,11 @@ function WageDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const { onClose, value: valueProp, open, breakpoint } = props;
   const [value, setValue] = React.useState(valueProp);
 
+  React.useEffect(() => console.log(value), [value]);
   React.useEffect(() => {
-    if (!open) {
+    // if (!open) {
       setValue(valueProp);
-    }
+    // }
   }, [valueProp, open]);
 
   const handleCancel = () => {
@@ -24,7 +25,7 @@ function WageDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   };
 
   const handleWageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({...(value? value : new ScoringDataProfile('')), annualWageRange: event.target.value});
+    setValue({...value, annualWageRange: event.target.value});
   };
 
   return (

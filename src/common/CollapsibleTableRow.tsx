@@ -5,23 +5,32 @@ import { Edit, KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import { Theme } from "@mui/system";
 
 function CollapsibleTableRow<T>(props: CollapsibleTableRowProps<T>) {
-  const { row, onProfileChange } = props;
+  const { row, data, onChange } = props;
   const [expand, setExpand] = React.useState(false);
 
+
+  console.log('hi');
+
+  // const [rowProps, setRowProps] = React.useState({open: false, editValue: {} as any});
   const [open, setOpen] = React.useState(false);
-  const [editValue, setEditValue] = React.useState<T>(props.row.scoreData[0]);
+  const [editValue, setEditValue] = React.useState<T>(data[0]);
 
   const handleClickListItem = (value: T) => {
-    setEditValue(value)
-    window.setTimeout(() => setOpen(true), 100);
+    // setRowProps({editValue: value, open: true});
+    setEditValue(value);
+    // window.setTimeout(() => setOpen(true), 100);
+    setOpen(true);
   };
 
-  const handleClose = (newValue?: T) => {
+  const handleClose = React.useCallback((newValue?: T) => {
+    // setRowProps(prev => {
+      // return {...prev, open: false};
+    // });
     setOpen(false);
     if (newValue) {
-      onProfileChange(newValue);
+      onChange(newValue);
     }
-  };
+  }, [setOpen, onChange]);
 
   const breakpointMatched = useMediaQuery<Theme>(theme => theme.breakpoints.up(props.breakpoint), {});
 
@@ -66,20 +75,20 @@ function CollapsibleTableRow<T>(props: CollapsibleTableRowProps<T>) {
   );
 
   return (
-    <React.Fragment>
+    <>
       {breakpointMatched ?
         null :
-        <React.Fragment>
+        <>
           <TableRow>
             {factorNameCell}
           </TableRow>
           {descRow}
-        </React.Fragment>
+        </>
       }
       <TableRow>
         { breakpointMatched ? factorNameCell : null }
         {
-          row.scoreData.map((data: T, index) => (
+          props.data.map((data: T, index) => (
             <TableCell
               key={index}
               sx={{
@@ -102,10 +111,10 @@ function CollapsibleTableRow<T>(props: CollapsibleTableRowProps<T>) {
       <row.rowEditComponent
         open={open}
         onClose={handleClose}
-        value={editValue}
+        value={editValue!}
         breakpoint={props.breakpoint}
       />
-    </React.Fragment>
+    </>
   );
 }
 

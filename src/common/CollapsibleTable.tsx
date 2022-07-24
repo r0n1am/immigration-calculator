@@ -7,15 +7,15 @@ import CollapsibleTableRow from "./CollapsibleTableRow";
 function CollapsibleTable<T>(props: CollapsibleTableProps<T>) {
   const breakpoint = 'sm';
   const breakpointMatched = useMediaQuery((theme: Theme) => theme.breakpoints.up(breakpoint));
-  
-  const rows = props.rowDataListCreator(props.profiles);
 
   const totalNameCell = <TableCell
     colSpan={breakpointMatched ? 1 : 999} sx={{textAlign: {xs: 'center', [`${breakpoint}`]: 'inherit'},}}
   >
     Total
   </TableCell>;
-  const totalCalculator = rows.map(r => r.rowValueCalculator).reduce((p, c) => (t: T) => p(t) + c(t));
+
+  const {rowData, data} = props;
+  const totalCalculator = rowData.map(r => r.rowValueCalculator).reduce((p, c) => (t: T) => p(t) + c(t));
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: (theme: Theme) => `calc(100vh - ${theme.mixins.toolbar.minHeight}px * 2)`, }}>
@@ -27,10 +27,10 @@ function CollapsibleTable<T>(props: CollapsibleTableProps<T>) {
                 null
               }
               {
-                !!props.profiles && props.profiles.length > 0 ?
-                props.profiles.map((profile, index) => (
+                !!data && data.length > 0 ?
+                data.map((d, index) => (
                   <TableCell key={index} sx={{textAlign: {xs: 'center', [`${breakpoint}`]: 'inherit'},}}>
-                    {props.profileNameExtractor(profile)}
+                    {props.columnNameExtractor(d)}
                   </TableCell>
                 )) :
                 null
@@ -38,10 +38,10 @@ function CollapsibleTable<T>(props: CollapsibleTableProps<T>) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <CollapsibleTableRow key={row.name} row={row} onProfileChange={props.onProfileChange} breakpoint={breakpoint} />
+            {rowData.map((row) => (
+              <CollapsibleTableRow key={row.name} row={row} data={data} onChange={props.onChange} breakpoint={breakpoint} />
             ))}
-            <React.Fragment>
+            <>
               {breakpointMatched ?
                 null :
                 <TableRow sx={{textAlign: {xs: 'center', [`${breakpoint}`]: 'inherit'}}}>{totalNameCell}</TableRow>
@@ -49,14 +49,14 @@ function CollapsibleTable<T>(props: CollapsibleTableProps<T>) {
               <TableRow>
                 { breakpointMatched ? totalNameCell : null}
                 {
-                  props.profiles.map((data: T, index) => (
+                  data.map((d: T, index) => (
                     <TableCell key={index} sx={{textAlign: {xs: 'center', [`${breakpoint}`]: 'inherit'}}}>
-                      {totalCalculator(data)}
+                      {totalCalculator(d)}
                     </TableCell>
                   ))
                 }
               </TableRow>
-            </React.Fragment>
+            </>
           </TableBody>
         </Table>
       </TableContainer>

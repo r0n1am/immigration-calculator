@@ -10,9 +10,9 @@ function LanguageDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const [value, setValue] = React.useState(valueProp);
 
   React.useEffect(() => {
-    if (!open) {
+    // if (!open) {
       setValue(valueProp);
-    }
+    // }
   }, [valueProp, open]);
 
   const handleCancel = () => {
@@ -24,7 +24,7 @@ function LanguageDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   };
 
   const handleLanguageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({...(value? value : new ScoringDataProfile('')), language: event.target.value});
+    setValue({...value, language: event.target.value});
   };
 
   return (
