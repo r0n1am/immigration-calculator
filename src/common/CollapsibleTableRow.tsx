@@ -8,9 +8,6 @@ function CollapsibleTableRow<T>(props: CollapsibleTableRowProps<T>) {
   const { row, data, onChange } = props;
   const [expand, setExpand] = React.useState(false);
 
-
-  console.log('hi');
-
   // const [rowProps, setRowProps] = React.useState({open: false, editValue: {} as any});
   const [open, setOpen] = React.useState(false);
   const [editValue, setEditValue] = React.useState<T>(data[0]);

@@ -9,7 +9,6 @@ function JobSkillLevelDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const { onClose, value: valueProp, open, breakpoint } = props;
   const [value, setValue] = React.useState(valueProp);
 
-  React.useEffect(() => console.log(value), [value]);
   React.useEffect(() => {
     // if (!open) {
       setValue(valueProp);
