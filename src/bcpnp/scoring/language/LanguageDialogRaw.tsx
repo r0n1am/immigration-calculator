@@ -10,9 +10,7 @@ function LanguageDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const [value, setValue] = React.useState(valueProp);
 
   React.useEffect(() => {
-    // if (!open) {
-      setValue(valueProp);
-    // }
+    setValue(valueProp);
   }, [valueProp, open]);
 
   const handleCancel = () => {
@@ -39,7 +37,7 @@ function LanguageDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
       <RadioGroup
         aria-label="Canadian Language Benchmark Level"
         name="Canadian Language Benchmark Level"
-        value={value?.language}
+        value={value.language}
         onChange={handleLanguageChange}
       >
         {Object.entries(LanguageScoringGrid).filter(([key, _]) => key !== 'Maximum Score').map(([key, _]) => (

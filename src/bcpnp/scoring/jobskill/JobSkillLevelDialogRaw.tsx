@@ -10,10 +10,8 @@ function JobSkillLevelDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const [value, setValue] = React.useState(valueProp);
 
   React.useEffect(() => {
-    // if (!open) {
-      setValue(valueProp);
-    // }
-  }, [valueProp, open]);
+    setValue(valueProp);
+  }, [valueProp]);
 
   const handleCancel = () => {
     onClose();
@@ -43,7 +41,7 @@ function JobSkillLevelDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
       <RadioGroup
         aria-label="job skill level"
         name="job skill level"
-        value={value?.noc}
+        value={value.noc}
         onChange={handleJobSkillLevelChange}
       >
         {Object.entries(JobSkillLevelScoringGrid.Basic).map(([key, value]) => (
@@ -53,11 +51,11 @@ function JobSkillLevelDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
       <FormLabel component="legend">Additional points</FormLabel>
       <FormGroup>
         <FormControlLabel
-          control={<Checkbox checked={value?.noc00} onChange={handleAdditionalPointChange} name="noc00" />}
+          control={<Checkbox checked={value.noc00} onChange={handleAdditionalPointChange} name="noc00" />}
           label={JobSkillLevelScoringGrid.Additional.noc00.desc}
         />
         <FormControlLabel
-          control={<Checkbox checked={value?.fullTimeForBcEmployer} onChange={handleAdditionalPointChange} name="fullTimeForBcEmployer" />}
+          control={<Checkbox checked={value.fullTimeForBcEmployer} onChange={handleAdditionalPointChange} name="fullTimeForBcEmployer" />}
           label={JobSkillLevelScoringGrid.Additional.fullTimeForBcEmployer.desc}
         />
       </FormGroup>

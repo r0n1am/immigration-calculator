@@ -7,22 +7,15 @@ import { Theme } from "@mui/system";
 function CollapsibleTableRow<T>(props: CollapsibleTableRowProps<T>) {
   const { row, data, onChange } = props;
   const [expand, setExpand] = React.useState(false);
-
-  // const [rowProps, setRowProps] = React.useState({open: false, editValue: {} as any});
   const [open, setOpen] = React.useState(false);
   const [editValue, setEditValue] = React.useState<T>(data[0]);
 
   const handleClickListItem = (value: T) => {
-    // setRowProps({editValue: value, open: true});
     setEditValue(value);
-    // window.setTimeout(() => setOpen(true), 100);
     setOpen(true);
   };
 
   const handleClose = React.useCallback((newValue?: T) => {
-    // setRowProps(prev => {
-      // return {...prev, open: false};
-    // });
     setOpen(false);
     if (newValue) {
       onChange(newValue);
@@ -73,8 +66,7 @@ function CollapsibleTableRow<T>(props: CollapsibleTableRowProps<T>) {
 
   return (
     <>
-      {breakpointMatched ?
-        null :
+      {!breakpointMatched &&
         <>
           <TableRow>
             {factorNameCell}
@@ -83,7 +75,7 @@ function CollapsibleTableRow<T>(props: CollapsibleTableRowProps<T>) {
         </>
       }
       <TableRow>
-        { breakpointMatched ? factorNameCell : null }
+        { breakpointMatched && factorNameCell }
         {
           props.data.map((data: T, index) => (
             <TableCell
@@ -104,11 +96,11 @@ function CollapsibleTableRow<T>(props: CollapsibleTableRowProps<T>) {
         }
         
       </TableRow>
-      { breakpointMatched ? descRow : null }
+      { breakpointMatched && descRow }
       <row.rowEditComponent
         open={open}
         onClose={handleClose}
-        value={editValue!}
+        value={editValue}
         breakpoint={props.breakpoint}
       />
     </>

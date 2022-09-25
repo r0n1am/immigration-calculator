@@ -10,10 +10,8 @@ function WageDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const [value, setValue] = React.useState(valueProp);
 
   React.useEffect(() => {
-    // if (!open) {
-      setValue(valueProp);
-    // }
-  }, [valueProp, open]);
+    setValue(valueProp);
+  }, [valueProp]);
 
   const handleCancel = () => {
     onClose();
@@ -39,7 +37,7 @@ function WageDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
       <RadioGroup
         aria-label="wage range"
         name="wage range"
-        value={value?.annualWageRange}
+        value={value.annualWageRange}
         onChange={handleWageChange}
       >
         {Object.entries(WageScoringGrid).filter(([key, _]) => key !== 'Maximum Score').map(([key, value]) => (

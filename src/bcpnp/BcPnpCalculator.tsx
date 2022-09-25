@@ -40,25 +40,26 @@ function BcPnpCalculator() {
   const [profiles, setProfiles] = React.useState([new ScoringDataProfile('Profile 1'), new ScoringDataProfile('Profile 2')]);
 
   const rowData = React.useMemo(() => createRowDataList(), []);
-  const onChange = React.useCallback((profile: ScoringDataProfile) => {
-    setProfiles(
-      oldProfiles => {
-        let isChanged = false;
-        const newProfiles = oldProfiles.map(oldProfile => {
-          if (oldProfile.profileName === profile.profileName
-            && !_.isEqual(oldProfile, profile)){
-            isChanged = true;
-            return {...profile};
+  const onChange = 
+    React.useCallback((profile: ScoringDataProfile) => 
+      setProfiles(
+        oldProfiles => {
+          let isChanged = false;
+          const newProfiles = oldProfiles.map(oldProfile => {
+            if (oldProfile.profileName === profile.profileName
+              && !_.isEqual(oldProfile, profile)){
+              isChanged = true;
+              return {...profile};
+            }
+            return oldProfile;
+          });
+          if (isChanged) {
+            return newProfiles;
           }
-          return oldProfile;
-        });
-        if (isChanged) {
-          return newProfiles;
+          return oldProfiles;
         }
-        return oldProfiles;
-      }
-    )
-  }, []);
+      )
+    , [setProfiles]);
 
   return (
     <CollapsibleTable

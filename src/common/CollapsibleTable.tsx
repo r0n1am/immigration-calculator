@@ -15,7 +15,10 @@ function CollapsibleTable<T>(props: CollapsibleTableProps<T>) {
   </TableCell>;
 
   const {rowData, data} = props;
-  const totalCalculator = rowData.map(r => r.rowValueCalculator).reduce((p, c) => (t: T) => p(t) + c(t));
+  const totalCalculator = React.useMemo(() => 
+    rowData.map(r => r.rowValueCalculator).reduce((p, c) => (t: T) => p(t) + c(t))
+  , [rowData]);
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: (theme: Theme) => `calc(100vh - ${theme.mixins.toolbar.minHeight}px * 2)`, }}>

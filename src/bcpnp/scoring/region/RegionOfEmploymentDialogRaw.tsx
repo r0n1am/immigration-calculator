@@ -10,9 +10,7 @@ function RegionOfEmploymentDialogRaw(props: DataComponentProp<ScoringDataProfile
   const [value, setValue] = React.useState(valueProp);
 
   React.useEffect(() => {
-    // if (!open) {
-      setValue(valueProp);
-    // }
+    setValue(valueProp);
   }, [valueProp, open]);
 
   const handleCancel = () => {
@@ -39,7 +37,7 @@ function RegionOfEmploymentDialogRaw(props: DataComponentProp<ScoringDataProfile
       <RadioGroup
         aria-label="region of employment"
         name="region of employment"
-        value={value?.regionOfEmployment}
+        value={value.regionOfEmployment}
         onChange={handleRegionOfEmploymentChange}
       >
         {Object.entries(RegionOfEmploymentScoringGrid).filter(([key, _]) => key !== 'Maximum Score').map(([key, value]) => (

@@ -10,9 +10,7 @@ function EducationDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const [value, setValue] = React.useState(valueProp);
 
   React.useEffect(() => {
-    // if (!open) {
-      setValue(valueProp);
-    // }
+    setValue(valueProp);
   }, [valueProp, open]);
   
   const handleEducationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +55,7 @@ function EducationDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
         <RadioGroup
           aria-label="education level"
           name="work experience"
-          value={value?.highestEducation}
+          value={value.highestEducation}
           onChange={handleEducationChange}
         >
           {Object.entries(EducationScoringGrid.Basic).map(([key, value]) => (
@@ -69,19 +67,19 @@ function EducationDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
       <FormControl error={additionalPointError} component="fieldset">
         <FormGroup >
           <FormControlLabel
-            control={<Checkbox checked={value?.bcPostSecondaryEducationCompleted} onChange={handleAdditionalPointChange} name="bcPostSecondaryEducationCompleted" />}
+            control={<Checkbox checked={value.bcPostSecondaryEducationCompleted} onChange={handleAdditionalPointChange} name="bcPostSecondaryEducationCompleted" />}
             label={EducationScoringGrid.Additional.bcPostSecondaryEducationCompleted.desc}
           />
           <FormControlLabel
-            control={<Checkbox checked={value?.caPostSecondaryEducationCompleted} onChange={handleAdditionalPointChange} name="caPostSecondaryEducationCompleted" />}
+            control={<Checkbox checked={value.caPostSecondaryEducationCompleted} onChange={handleAdditionalPointChange} name="caPostSecondaryEducationCompleted" />}
             label={EducationScoringGrid.Additional.caPostSecondaryEducationCompleted.desc}
           />
           <FormControlLabel
-            control={<Checkbox checked={value?.eca} onChange={handleAdditionalPointChange} name="eca" />}
+            control={<Checkbox checked={value.eca} onChange={handleAdditionalPointChange} name="eca" />}
             label={EducationScoringGrid.Additional.eca.desc}
           />
           <FormControlLabel
-            control={<Checkbox checked={value?.itabcCompleted} onChange={handleAdditionalPointChange} name="itabcCompleted" />}
+            control={<Checkbox checked={value.itabcCompleted} onChange={handleAdditionalPointChange} name="itabcCompleted" />}
             label={EducationScoringGrid.Additional.itabcCompleted.desc}
           />
         </FormGroup>

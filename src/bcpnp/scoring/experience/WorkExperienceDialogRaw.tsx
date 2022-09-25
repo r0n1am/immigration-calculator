@@ -10,9 +10,7 @@ function WorkExperienceDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
   const [value, setValue] = React.useState(valueProp);
 
   React.useEffect(() => {
-    // if (!open) {
-      setValue(valueProp);
-    // }
+    setValue(valueProp);
   }, [valueProp, open]);
 
   const handleCancel = () => {
@@ -43,7 +41,7 @@ function WorkExperienceDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
       <RadioGroup
         aria-label="work experience"
         name="work experience"
-        value={value?.relatedWorkExperience}
+        value={value.relatedWorkExperience}
         onChange={handleWorkExperienceLevelChange}
       >
         {Object.entries(WorkExperienceScoringGrid.Basic).map(([key, value]) => (
@@ -53,7 +51,7 @@ function WorkExperienceDialogRaw(props: DataComponentProp<ScoringDataProfile>) {
       <FormLabel component="legend">Additional points</FormLabel>
       <FormGroup>
         <FormControlLabel
-          control={<Checkbox checked={value?.oneYearPlusCanadianExperience} onChange={handleAdditionalPointChange} name="oneYearPlusCanadianExperience" />}
+          control={<Checkbox checked={value.oneYearPlusCanadianExperience} onChange={handleAdditionalPointChange} name="oneYearPlusCanadianExperience" />}
           label={WorkExperienceScoringGrid.Additional.oneYearPlusCanadianExperience.desc}
         />
       </FormGroup>
